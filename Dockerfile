@@ -18,7 +18,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 # Setup and Install Jenkins
 ADD scripts /opt/jenkins-scripts
 
-RUN mkdir -p ${JENKINS_BASE} && wget -O ${JENKINS_BASE}/jenkins.war http://mirrors.jenkins.io/war-stable/latest/jenkins.war && \
+RUN chmod 700 /opt/jenkins-scripts/jenkins.sh && mkdir -p ${JENKINS_BASE} && wget -O ${JENKINS_BASE}/jenkins.war http://mirrors.jenkins.io/war-stable/latest/jenkins.war && \
     adduser  --disabled-password --gecos '' --home ${JENKINS_HOME} jenkins && pip3 install boto3
 
 ENTRYPOINT ["/opt/jenkins-scripts/jenkins.sh"]
