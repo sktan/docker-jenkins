@@ -5,6 +5,7 @@ ENV JENKINS_BASE /opt/jenkins
 ENV JENKINS_HOME /var/lib/jenkins
 ENV JENKINS_TZ Australia/Sydney
 ENV CORRETTO_URL https://d2znqt9b1bc64u.cloudfront.net/java-1.8.0-amazon-corretto-jdk_8.202.08-2_amd64.deb
+ENV DOCKER_GID 999
 EXPOSE 8080/tcp
 
 # Install Java and minimum requirements
@@ -13,7 +14,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     curl ${CORRETTO_URL} -O && \
     dpkg --install java-*.deb && \
     pip3 install awscli && \
-    java -version
+    java -version \
+    groupadd -g ${DOCKER_GID} docker && usermod -a -g docker jenkins
 
 # Setup and Install Jenkins
 ADD scripts /opt/jenkins-scripts
