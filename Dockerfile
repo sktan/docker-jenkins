@@ -14,13 +14,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     curl ${CORRETTO_URL} -O && \
     dpkg --install java-*.deb && \
     pip3 install awscli && \
-    java -version \
-    groupadd -g ${DOCKER_GID} docker && usermod -a -g docker jenkins
+    java -version
 
-# Setup and Install Jenkins
+# Setup and Install Jenkins and add Docker user group
 ADD scripts /opt/jenkins-scripts
 
 RUN chmod 700 /opt/jenkins-scripts/jenkins.sh && mkdir -p ${JENKINS_BASE} && wget -O ${JENKINS_BASE}/jenkins.war http://mirrors.jenkins.io/war-stable/latest/jenkins.war && \
-    adduser  --disabled-password --gecos '' --home ${JENKINS_HOME} jenkins && pip3 install boto3
+    adduser  --disabled-password --gecos '' --home ${JENKINS_HOME} jenkins && pip3 install boto3 && groupadd -g ${DOCKER_GID} docker && usermod -a -G docker jenkins
 
 ENTRYPOINT ["/opt/jenkins-scripts/jenkins.sh"]
