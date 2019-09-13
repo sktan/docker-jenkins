@@ -4,7 +4,7 @@ LABEL maintainer="Steven Tan <git@sktan.com>"
 ENV JENKINS_BASE /opt/jenkins
 ENV JENKINS_HOME /var/lib/jenkins
 ENV JENKINS_TZ Australia/Sydney
-ENV CORRETTO_URL https://d2znqt9b1bc64u.cloudfront.net/java-1.8.0-amazon-corretto-jdk_8.202.08-2_amd64.deb
+ENV CORRETTO_URL https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/java-1.8.0-amazon-corretto-jdk_8.222.10-1_amd64.deb
 ENV DOCKER_GID 999
 EXPOSE 8080/tcp
 
