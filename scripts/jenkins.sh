@@ -1,5 +1,7 @@
 #!/bin/bash
 
+groupmod -g ${DOCKER_GID} docker
+
 # Ensure all files are owned by Jenkins
 chown -R jenkins:jenkins ${JENKINS_BASE}
 chown -R jenkins:jenkins ${JENKINS_HOME}
