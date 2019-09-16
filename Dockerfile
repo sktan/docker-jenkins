@@ -10,7 +10,7 @@ EXPOSE 8080/tcp
 
 # Install Java and minimum requirements
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y java-common fontconfig libfreetype6 curl wget bash git sudo wget rsync openssh-client python python-pip python3 python3-pip && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y java-common fontconfig libfreetype6 curl wget bash git sudo wget rsync openssh-client libltdl7 python python-pip python3 python3-pip && \
     curl ${CORRETTO_URL} -O && \
     dpkg --install java-*.deb && \
     pip3 install awscli && \
