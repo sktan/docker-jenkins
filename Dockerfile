@@ -4,15 +4,15 @@ LABEL maintainer="Steven Tan <git@sktan.com>"
 ENV JENKINS_BASE /opt/jenkins
 ENV JENKINS_HOME /var/lib/jenkins
 ENV JENKINS_TZ Australia/Sydney
-ENV CORRETTO_URL https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/java-1.8.0-amazon-corretto-jdk_8.222.10-1_amd64.deb
+ENV CORRETTO_URL https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.deb
 ENV DOCKER_GID 999
 EXPOSE 8080/tcp
 
 # Install Java and minimum requirements
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y java-common fontconfig libfreetype6 curl wget bash git sudo wget rsync openssh-client libltdl7 python python-pip python3 python3-pip && \
-    curl ${CORRETTO_URL} -O && \
-    dpkg --install java-*.deb && \
+    curl -L ${CORRETTO_URL} -O && \
+    dpkg --install amazon-corretto-11-*.deb && \
     pip3 install awscli && \
     java -version
 
