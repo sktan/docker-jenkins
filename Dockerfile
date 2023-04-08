@@ -12,7 +12,7 @@ EXPOSE 8080/tcp
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y java-common fontconfig libfreetype6 curl wget bash git sudo wget rsync openssh-client libltdl7 python python-pip python3 python3-pip && \
     curl -L ${CORRETTO_URL} -O && \
-    rm amazon-corretto-11-*.deb
+    rm amazon-corretto-11-*.deb && \
     dpkg --install amazon-corretto-11-*.deb && \
     pip3 install awscli && \
     java -version
