@@ -1,10 +1,10 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 LABEL maintainer="Steven Tan <git@sktan.com>"
 
 ENV JENKINS_BASE /opt/jenkins
 ENV JENKINS_HOME /var/lib/jenkins
 ENV JENKINS_TZ Australia/Sydney
-ENV CORRETTO_URL https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.deb
+ENV CORRETTO_URL https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.deb
 ENV DOCKER_GID 999
 EXPOSE 8080/tcp
 
@@ -12,6 +12,7 @@ EXPOSE 8080/tcp
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y java-common fontconfig libfreetype6 curl wget bash git sudo wget rsync openssh-client libltdl7 python python-pip python3 python3-pip && \
     curl -L ${CORRETTO_URL} -O && \
+    rm amazon-corretto-11-*.deb
     dpkg --install amazon-corretto-11-*.deb && \
     pip3 install awscli && \
     java -version
